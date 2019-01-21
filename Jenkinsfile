@@ -1,11 +1,12 @@
 pipeline {
+	agent any 
 	stages {
-		stage("Test produce") {
+		stage('Test produce') {
 			steps {
 				sh 'produce.sh'
 			}
 		}
-		stage("Test serve") {
+		stage('Test serve') {
 			steps {
 				sh 'serve.sh'
 			}
