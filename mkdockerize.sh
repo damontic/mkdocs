@@ -26,7 +26,8 @@ produce() {
 	if [[ -d $1 ]]; then
 		cd $1
 		mkdocs build &> /dev/null
-		tar cz -C site .
+		tar czf - -C site .
+		echo hola
 		rm -rf site
 	else
 		produce_help $1	
@@ -34,7 +35,10 @@ produce() {
 }
 
 serve() {
-	tar -C site xz -
+	mkdir www
+	tar xzf - -C www
+	cd www
+	mkdocs serve
 }
 
 case $1 in
@@ -49,3 +53,4 @@ case $1 in
 		init_help
 		;;
 esac
+sh
