@@ -26,8 +26,9 @@ produce() {
 	if [[ -d $1 ]]; then
 		cd $1
 		mkdocs build &> /dev/null
-		tar czf - -C site .
-		rm -rf site
+		echo "dev_addr: 0.0.0.0:8000" >> mkdocs.yml
+		cd ..
+		tar czf - -C $1 .
 	else
 		produce_help $1	
 	fi
@@ -45,7 +46,6 @@ case $1 in
 		produce $2
 		;;
 	serve)
-		echo "Serving..."
 		serve
 		;;
 	*)
