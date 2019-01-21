@@ -2,7 +2,7 @@
 
 produce_help() {
 	echo "Usage example:"
-	echo "docker run -v /localpath/to/mkdocs_project:/conainer/mountpoint damontic/mkdocs produce /conainer/mountpoint"
+	echo "docker run --rm -v /home/david/Desktop/my_project:/mkdocs/my_project damontic/mkdocs produce /mkdocs/my_project"
 }
 
 serve_help() {
@@ -27,7 +27,6 @@ produce() {
 		cd $1
 		mkdocs build &> /dev/null
 		tar czf - -C site .
-		echo hola
 		rm -rf site
 	else
 		produce_help $1	
@@ -53,4 +52,3 @@ case $1 in
 		init_help
 		;;
 esac
-sh
