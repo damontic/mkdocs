@@ -1,14 +1,15 @@
 pipeline {
 	agent any 
 	stages {
-		stage('Test produce') {
+		stage('Build') {
 			steps {
 				sh 'produce.sh'
 			}
 		}
-		stage('Test serve') {
+		stage('Test') {
 			steps {
 				sh 'serve.sh'
+				sh 'curl localhost:8000'
 			}
 		}
 	}
