@@ -26,6 +26,7 @@ produce() {
 	if [[ -d $1 ]]; then
 		cd $1
 		mkdocs build &> /dev/null
+		# this is needed to make sure that mkdocs accepts connections
 		echo "dev_addr: 0.0.0.0:8000" >> mkdocs.yml
 		cd ..
 		tar czf - -C $1 .
