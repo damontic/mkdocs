@@ -7,7 +7,7 @@ RUN pip3 install mkdocs
 EXPOSE 8080
 
 WORKDIR /mkdocs
-COPY init.sh /mkdocs/bin/init.sh
-RUN chmod u+x /mkdocs/bin/init.sh
+COPY mkdockerize.sh /mkdocs/bin/mkdockerize.sh
+RUN chmod u+x /mkdocs/bin/mkdockerize.sh
 
-ENTRYPOINT ["/mkdocs/bin/init.sh"]
+ENTRYPOINT ["/mkdocs/bin/mkdockerize.sh"]

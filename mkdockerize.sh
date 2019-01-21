@@ -6,13 +6,14 @@ produce_help() {
 }
 
 serve_help() {
-	echo "Help serve"
+	echo "Usage example:"
+	echo "docker run -p 8000:8000 <arguments> <the-docker-image-name> serve"
 }
 
 init_help() {
 	echo "Produce or serve a local mkdocs directory"
-	echo "docker run <arguments> <the-docker-image-name> produce"
-	echo "docker run -p 8000:8000 <arguments> <the-docker-image-name> serve"
+	produce_help
+	serve_help
 }
 
 produce() {
@@ -24,24 +25,27 @@ produce() {
 	
 	if [[ -d $1 ]]; then
 		cd $1
-		mkdocs build
-		cd site
-		tar cz .
+		mkdocs build &> /dev/null
+		tar cz -C site .
+		rm -rf site
 	else
 		produce_help $1	
 	fi
 }
 
+serve() {
+	tar -C site xz -
+}
+
 case $1 in
 	produce)
-		echo "Producing..."
 		produce $2
 		;;
 	serve)
 		echo "Serving..."
+		serve
 		;;
 	*)
 		init_help
 		;;
 esac
-sh
